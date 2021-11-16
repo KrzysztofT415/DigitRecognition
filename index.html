@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TensorFlow number recognition</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Merriweather+Sans'>
+    <link href='style.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.0/dist/tfjs-vis.umd.min.js"></script>
+    <script type='module' src='./js/script.js'></script>
+</head>
+<body>
+    <div id='panel'>
+        <canvas id='canvas' width='500px' height='500px'></canvas>
+        <button id='clear'>CLEAR CANVAS</button>
+        <button id='saveImg'>SAVE IMG</button>
+        <div class='col3'>
+            <button id='create'>CREATE MODEL</button>
+            <button id='load'>LOAD MODEL</button>
+            <button id='save'>SAVE MODEL</button>
+        </div>
+        <div id='data' class='col3'>
+            <button id='loadData'>MNIST</button>
+            <button id='loadMy'>MY DATA</button>
+            <button id='loadFriend'>FRIEND DATA</button>
+        </div>
+        <div class='col4'>
+            <label for='epochs'>EPOCHS:</label>
+            <input id='epochs' type='number' min='1'>
+            <button id='train' class='model' disabled>TRAIN MODEL</button>
+            <button id='test' class='model' disabled>TEST MODEL</button>
+        </div>
+        <button id='predict' class='model' disabled>PREDICT DRAWING</button>
+    </div>
+    <div id='stats' style='display: flex; flex-direction: column'>
+        <label>Image resized : <canvas id='mini' width='28px' height='28px'></canvas></label>
+        <label>Predicted number : <a id='prediction'>?</a></label>
+    </div>
+    <label id='info'></label>
+</body>
+</html>
