@@ -15,16 +15,19 @@
         <canvas id='canvas' width='500px' height='500px'></canvas>
         <button id='clear'>CLEAR CANVAS</button>
         <button id='saveImg'>SAVE IMG</button>
+
         <div class='col3'>
-            <button id='create'>CREATE MODEL</button>
-            <button id='load'>LOAD MODEL</button>
-            <button id='save'>SAVE MODEL</button>
+            <button id='createModel'>CREATE MODEL</button>
+            <button id='loadModel'>LOAD MODEL</button>
+            <button id='saveModel'>SAVE MODEL</button>
         </div>
+
         <div id='data' class='col3'>
-            <button id='loadData'>MNIST</button>
+            <button id='loadMnist'>MNIST</button>
             <button id='loadMy'>MY DATA</button>
             <button id='loadFriend'>FRIEND DATA</button>
         </div>
+
         <div class='col4'>
             <label for='epochs'>EPOCHS:</label>
             <input id='epochs' type='number' min='1'>
@@ -33,10 +36,12 @@
         </div>
         <button id='predict' class='model' disabled>PREDICT DRAWING</button>
     </div>
+
     <div id='stats' style='display: flex; flex-direction: column'>
         <label>Image resized : <canvas id='mini' width='28px' height='28px'></canvas></label>
         <label>Predicted number : <a id='prediction'>?</a></label>
     </div>
+
     <label id='info'></label>
 </body>
 </html>

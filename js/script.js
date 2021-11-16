@@ -1,21 +1,19 @@
 import { MnistData } from './mnist.js'
 const canvas = document.getElementById('canvas')
-const mini = document.getElementById('mini')
-const prediction = document.getElementById('prediction')
-const info = document.getElementById('info')
 const ctx = canvas.getContext('2d')
+
+const mini = document.getElementById('mini')
 const mini_ctx = mini.getContext('2d')
-const offset_x = canvas.offsetLeft
-const offset_y = canvas.offsetTop
+
+const info = document.getElementById('info')
 info.innerText = 'Info log :\n\n'
 
 
 // FETCHING DATA
 
 
-let model = null
-let training_data, training_labels, test_data, test_labels, dataLoaded = false
-let loadMnist = async(event) => {
+let training_data, training_labels, test_data, test_labels, dataLoaded = false, model = null
+const loadMnist = async(event) => {
     info.innerText += '-> Loading MNIST data\n'
     for (let data of document.getElementById('data').children)
         data.classList.remove('chosen')
@@ -36,8 +34,8 @@ let loadMnist = async(event) => {
     let buttons = document.getElementsByClassName('model')
     for (const button of buttons) button.disabled = (model === null)
 }
-let loadImages = folder_path => {
-    return new Promise((resolve, reject) => {
+const loadImages = folder_path => {
+    return new Promise((resolve, _) => {
         const SIZE = 28**2
         const datasetBytesBuffer = new ArrayBuffer(30 * SIZE * 4)
         const datasetLabels = new Uint8Array(30 * 10)
@@ -66,7 +64,7 @@ let loadImages = folder_path => {
         resolve([datasetBytes, datasetLabels])
     })
 }
-let loadData = async(target, folder_path) => {
+const loadData = async(target, folder_path) => {
     info.innerText += '-> Loading ' + folder_path + '\n'
     for (let data of document.getElementById('data').children)
         data.classList.remove('chosen')
@@ -87,10 +85,10 @@ let loadData = async(target, folder_path) => {
 }
 
 
-// MODEL CREATION
+// MODEL OPERATIONS
 
 
-let createModel = _ => {
+const createModel = _ => {
     model = tf.sequential({
         layers: [
             tf.layers.flatten({inputShape: [28, 28, 1]}),
@@ -109,7 +107,7 @@ let createModel = _ => {
     for (const button of buttons) button.disabled = !dataLoaded
     document.getElementById('create').classList.add('chosen')
 }
-let loadModel = async() => {
+const loadModel = async() => {
     model = await tf.loadLayersModel('localstorage://my-model-1')
     model.compile({
         optimizer: 'adam',
@@ -121,7 +119,7 @@ let loadModel = async() => {
     for (const button of buttons) button.disabled = !dataLoaded
     document.getElementById('create').classList.add('chosen')
 }
-let saveModel = async() => {
+const saveModel = async() => {
     await model.save('localstorage://my-model-1')
     info.innerText += '-> Model saved on local storage\n'
 }
@@ -130,7 +128,7 @@ let saveModel = async() => {
 // TRAINING AND TESTING MODEL
 
 
-let train = async() => {
+const train = async() => {
     info.innerText += '-> Beginning training\n: Accuracy\n'
     let epochs = document.getElementById('epochs').value
     if (!epochs) epochs = 1
@@ -140,7 +138,7 @@ let train = async() => {
     })
     info.innerText += '-> Model trained\n'
 }
-let test = async() => {
+const test = async() => {
     info.innerText += '-> Running tests\n: Accuracy '
     const result = await model.evaluate(test_data, test_labels)
     info.innerText += result[1] + '\n'
@@ -151,13 +149,14 @@ let test = async() => {
 // PREDICTION
 
 
-let getDataBytesView = async(imageData) => {
+const prediction = document.getElementById('prediction')
+const getDataBytesView = async(imageData) => {
     let bytesArray = []
     for (let i = 0; i < imageData.data.length / 4; ++i)
         bytesArray[i] = imageData.data[i * 4] / 255
     return new Float32Array(bytesArray)
 }
-let predictModel = async(dataBytesView) => {
+const predictModel = async(dataBytesView) => {
     let output = await model.predict(dataBytesView)
     let outputData = JSON.parse(output.toString().slice(13,150).split(',]')[0])
     info.innerText += '* Made prediction:\n'
@@ -170,7 +169,7 @@ let predictModel = async(dataBytesView) => {
 
     prediction.innerText = maximum.toString()
 }
-let makePrediction = async() => {
+const makePrediction = async() => {
     let imageToGuess = new Image()
     imageToGuess.onload = () => {
         mini_ctx.clearRect(0, 0, mini.width, mini.height)
@@ -188,7 +187,9 @@ let makePrediction = async() => {
 // CANVAS OPERATIONS
 
 
-let last_mouse_x, last_mouse_y, mouse_x, mouse_y, mousedown, scale = 30
+const offset_x = canvas.offsetLeft
+const offset_y = canvas.offsetTop
+let last_mouse_x, last_mouse_y, mouse_x, mouse_y, mousedown, scale = 50
 canvas.addEventListener('mousedown', e => {
     last_mouse_x = mouse_x = e.clientX - offset_x
     last_mouse_y = mouse_y = e.clientY - offset_y
@@ -215,7 +216,7 @@ canvas.addEventListener('mousemove', e => {
 })
 canvas.addEventListener('wheel', e => scale += e.deltaY * -0.1)
 
-let saveImg = _ => {
+const saveImg = _ => {
     let imageToGuess = new Image()
     imageToGuess.onload = () => {
         mini_ctx.clearRect(0, 0, mini.width, mini.height)
@@ -229,23 +230,25 @@ let saveImg = _ => {
 }
 
 
-// BUTTONS FUNCTIONALITY
+// BUTTONS AND WINDOW FUNCTIONALITY
 
 
 document.getElementById('clear').onclick = _ => ctx.clearRect(0, 0, canvas.width, canvas.height)
 document.getElementById('saveImg').onclick = saveImg
-document.getElementById('create').onclick = createModel
-document.getElementById('load').onclick = loadModel
-document.getElementById('save').onclick = saveModel
-document.getElementById('loadData').onclick = loadMnist
+
+document.getElementById('createModel').onclick = createModel
+document.getElementById('loadModel').onclick = loadModel
+document.getElementById('saveModel').onclick = saveModel
+
+document.getElementById('loadMnist').onclick = loadMnist
 document.getElementById('loadMy').onclick = event => loadData(event.target, 'test_data_mine')
 document.getElementById('loadFriend').onclick = event => loadData(event.target, 'test_data_friend')
-document.getElementById('test').onclick = test
+
 document.getElementById('train').onclick = train
+document.getElementById('test').onclick = test
 document.getElementById('predict').onclick = makePrediction
 
-let elem = document.getElementById('info')
-let getInnermostHovered = _ => {
+const getInnermostHovered = _ => {
     let n = document.querySelector(":hover"), nn
     while (n) {
         nn = n
@@ -254,6 +257,6 @@ let getInnermostHovered = _ => {
     return nn
 }
 window.setInterval(_ => {
-    if (getInnermostHovered() !== elem)
-        elem.scrollTop = elem.scrollHeight
+    if (getInnermostHovered() !== info)
+        info.scrollTop = info.scrollHeight
 }, 1000)
