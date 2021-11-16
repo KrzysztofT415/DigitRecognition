@@ -105,7 +105,7 @@ const createModel = _ => {
 
     let buttons = document.getElementsByClassName('model')
     for (const button of buttons) button.disabled = !dataLoaded
-    document.getElementById('create').classList.add('chosen')
+    document.getElementById('createModel').classList.add('chosen')
 }
 const loadModel = async() => {
     model = await tf.loadLayersModel('localstorage://my-model-1')
@@ -117,7 +117,7 @@ const loadModel = async() => {
     info.innerText += '-> Model loaded from local storage\n'
     let buttons = document.getElementsByClassName('model')
     for (const button of buttons) button.disabled = !dataLoaded
-    document.getElementById('create').classList.add('chosen')
+    document.getElementById('createModel').classList.add('chosen')
 }
 const saveModel = async() => {
     await model.save('localstorage://my-model-1')
