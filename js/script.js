@@ -162,7 +162,7 @@ const predictModel = async(dataBytesView) => {
     info.innerText += '* Made prediction:\n'
 
     let maximum = 0
-    for (let i = 1; i < 10; ++i) {
+    for (let i = 0; i < 10; ++i) {
         info.innerText += i + ' : ' + outputData[i] + '\n'
         if (outputData[i] > outputData[maximum]) maximum = i
     }
