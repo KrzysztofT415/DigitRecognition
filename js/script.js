@@ -1,9 +1,11 @@
 import { MnistData } from './mnist.js'
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
+ctx.imageSmoothingEnabled = false
 
 const mini = document.getElementById('mini')
 const mini_ctx = mini.getContext('2d')
+mini_ctx.imageSmoothingEnabled = false
 
 const info = document.getElementById('info')
 info.innerText = 'Info log :\n\n'
@@ -174,6 +176,16 @@ const makePrediction = async() => {
     imageToGuess.onload = () => {
         mini_ctx.clearRect(0, 0, mini.width, mini.height)
         mini_ctx.drawImage(imageToGuess,0 , 0, 28, 28)
+
+        if (document.getElementById("render").checked) {
+            let miniImage = new Image()
+            miniImage.src = mini.toDataURL()
+            miniImage.onload = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+                ctx.drawImage(miniImage, 0, 0, canvas.width, canvas.height)
+            }
+        }
+
         let imageData = mini_ctx.getImageData(0, 0, 28, 28)
         getDataBytesView(imageData).then(dataBytesView => predictModel(tf.tensor4d(dataBytesView, [1, 28, 28, 1])))
     }

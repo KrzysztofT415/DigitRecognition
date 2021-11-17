@@ -30,11 +30,14 @@
 
         <div class='col4'>
             <label for='epochs'>EPOCHS:</label>
-            <input id='epochs' type='number' min='1'>
+            <input id='epochs' type='number' min='1' class='number'>
             <button id='train' class='model' disabled>TRAIN MODEL</button>
             <button id='test' class='model' disabled>TEST MODEL</button>
         </div>
-        <button id='predict' class='model' disabled>PREDICT DRAWING</button>
+        <div class='col2'>
+            <label>Show resize: <input type="checkbox" id="render" class='checkbox'></label>
+            <button id='predict' class='model' disabled>PREDICT DRAWING</button>
+        </div>
     </div>
 
     <div id='stats' style='display: flex; flex-direction: column'>

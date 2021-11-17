@@ -100,6 +100,10 @@ button.chosen {
     color: var(--secondaryLE);
 }
 
+div.col2 {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
 div.col3 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -109,8 +113,12 @@ div.col4 {
     grid-template-columns: 0.62fr 0.38fr 1fr 1fr;
 }
 
-input {
+input.number {
     overflow: hidden;
+}
+input.checkbox {
+    height: 2vh;
+    width: 2vh;
 }
 
 .left {
