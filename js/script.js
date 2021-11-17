@@ -159,11 +159,11 @@ const getDataBytesView = async(imageData) => {
 const predictModel = async(dataBytesView) => {
     let output = await model.predict(dataBytesView)
     let outputData = JSON.parse(output.toString().slice(13,150).split(',]')[0])
-    info.innerText += '* Made prediction:\n'
+    info.innerText += '* Made prediction\n'
 
     let maximum = 0
     for (let i = 0; i < 10; ++i) {
-        info.innerText += i + ' : ' + outputData[i] + '\n'
+        document.getElementById('predictions' + i).innerText = i + ' : ' + outputData[i] + '\n'
         if (outputData[i] > outputData[maximum]) maximum = i
     }
 

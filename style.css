@@ -67,7 +67,7 @@ input {
     text-align: center;
 }
 
-label {
+label, a {
     color: var(--white);
     padding: 1vh 0;
     font-size: 1.2pc;
@@ -82,7 +82,7 @@ button.chosen {
     background-color: var(--secondaryLE);
 }
 
-#stats label {
+#stats label, #stats a {
     color: var(--white);
     font-size: 2.5pc;
     width: 20vw;
@@ -111,4 +111,9 @@ div.col4 {
 
 input {
     overflow: hidden;
+}
+
+.left {
+    text-align: left;
+    padding: 0;
 }
