@@ -1,37 +1,4 @@
-:root {
-    --green: #8bc34a;
-    --red: #f44336;
-    --brown: #5d4037;
-    --white: #ffffff;
-    --black: #000000;
-
-    --secondaryLE: #ffffa4;
-    --secondaryL: #ffff72;
-    --secondaryM: #ffeb3b;
-    --secondaryD: #c8b900;
-
-    --primaryL: #ffc947;
-    --primaryM: #ff9800;
-    --primaryD: #c66900;
-
-    --whiteL: #eceff1;
-    --whiteD: #babdbe;
-    --darkL: #61656d;
-    --darkM: #373b42;
-    --darkD: #11151b;
-}
-
-::selection {
-    color: var(--darkD);
-    background: var(--secondaryL);
-}
-
-* {
-    padding: 0;
-    margin: 0;
-    font-family: 'Merriweather Sans', serif;
-    box-sizing: border-box;
-}
+@import '/home/krzysiek/universal/_default_scss_template.scss';
 
 body {
     width: 100vw;
@@ -41,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 3vw;
-    background-color: var(--darkM);
+    background-color: $darkM;
 }
 
 #panel {
@@ -53,7 +20,7 @@ body {
 canvas {
     max-width: 500px;
     max-height: 500px;
-    background-color: var(--black);
+    background-color: $black;
 }
 
 button {
@@ -67,23 +34,25 @@ input {
     text-align: center;
 }
 
-label, a {
-    color: var(--white);
+label,
+a {
+    color: $white;
     padding: 1vh 0;
     font-size: 1.2pc;
     text-align: center;
 }
 
 button.chosen {
-    background-color: var(--secondaryLE);
+    background-color: $secondaryLE;
 }
 
 button.chosen {
-    background-color: var(--secondaryLE);
+    background-color: $secondaryLE;
 }
 
-#stats label, #stats a {
-    color: var(--white);
+#stats label,
+#stats a {
+    color: $white;
     font-size: 2.5pc;
     width: 20vw;
 }
@@ -97,7 +66,7 @@ button.chosen {
 }
 
 #info:hover {
-    color: var(--secondaryLE);
+    color: $secondaryLE;
 }
 
 div.col2 {

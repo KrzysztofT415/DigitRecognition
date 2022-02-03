@@ -2,13 +2,13 @@ const IMAGE_H = 28
 const IMAGE_W = 28
 const IMAGE_SIZE = IMAGE_H * IMAGE_W
 const N_CLASSES = 10
-const N_DATA  = 65000
+const N_DATA = 65000
 
 const MNIST_IMAGES_SPRITE_PATH = 'https://storage.googleapis.com/learnjs-data/model-builder/mnist_images.png'
 const MNIST_LABELS_PATH = 'https://storage.googleapis.com/learnjs-data/model-builder/mnist_labels_uint8'
 
 export class MnistData {
-    async load(nTrain = 60000, nTest  = 5000) {
+    async load(nTrain = 60000, nTest = 5000) {
         const img = new Image()
         const canvas = document.createElement('canvas')
         const ctx = canvas.getContext('2d')
@@ -48,9 +48,9 @@ export class MnistData {
 
         // Slice the the images and labels into train and test sets.
         this.trainImages = this.datasetImages.slice(0, IMAGE_SIZE * nTrain)
-        this.testImages = this.datasetImages.slice(IMAGE_SIZE * nTrain, IMAGE_SIZE * (nTrain+nTest))
+        this.testImages = this.datasetImages.slice(IMAGE_SIZE * nTrain, IMAGE_SIZE * (nTrain + nTest))
         this.trainLabels = this.datasetLabels.slice(0, N_CLASSES * nTrain)
-        this.testLabels = this.datasetLabels.slice(N_CLASSES * nTrain, N_CLASSES * (nTrain+nTest))
+        this.testLabels = this.datasetLabels.slice(N_CLASSES * nTrain, N_CLASSES * (nTrain + nTest))
         console.log(this.trainImages, this.trainLabels)
     }
 

@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TensorFlow number recognition</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Merriweather+Sans'>
-    <link href='style.css' rel='stylesheet'>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.0/dist/tfjs-vis.umd.min.js"></script>
-    <script type='module' src='./js/script.js'></script>
-</head>
-<body>
-    <div id='panel'>
-        <canvas id='canvas' width='500px' height='500px'></canvas>
-        <button id='clear'>CLEAR CANVAS</button>
-        <button id='saveImg'>SAVE IMG</button>
+    <head>
+        <meta charset="UTF-8" />
+        <title>TensorFlow number recognition</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans" />
+        <link href="scss/style.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis@1.0.0/dist/tfjs-vis.umd.min.js"></script>
+        <script type="module" src="js/script.js"></script>
+    </head>
+    <body>
+        <div id="panel">
+            <canvas id="canvas" width="500px" height="500px"></canvas>
+            <button id="clear">CLEAR CANVAS</button>
+            <button id="saveImg">SAVE IMG</button>
 
-        <div class='col3'>
-            <button id='createModel'>CREATE MODEL</button>
-            <button id='loadModel'>LOAD MODEL</button>
-            <button id='saveModel'>SAVE MODEL</button>
+            <div class="col3">
+                <button id="createModel">CREATE MODEL</button>
+                <button id="loadModel">LOAD MODEL</button>
+                <button id="saveModel">SAVE MODEL</button>
+            </div>
+
+            <div id="data" class="col3">
+                <button id="loadMnist">MNIST</button>
+                <button id="loadMy">MY DATA</button>
+                <button id="loadFriend">FRIEND DATA</button>
+            </div>
+
+            <div class="col4">
+                <label for="epochs">EPOCHS:</label>
+                <input id="epochs" type="number" min="1" class="number" />
+                <button id="train" class="model" disabled>TRAIN MODEL</button>
+                <button id="test" class="model" disabled>TEST MODEL</button>
+            </div>
+            <div class="col2">
+                <label>Show resize: <input type="checkbox" id="render" class="checkbox" /></label>
+                <button id="predict" class="model" disabled>PREDICT DRAWING</button>
+            </div>
         </div>
 
-        <div id='data' class='col3'>
-            <button id='loadMnist'>MNIST</button>
-            <button id='loadMy'>MY DATA</button>
-            <button id='loadFriend'>FRIEND DATA</button>
+        <div id="stats" style="display: flex; flex-direction: column">
+            <label>Image resized : <canvas id="mini" width="28px" height="28px"></canvas></label>
+            <label>Predicted number : <a id="prediction">?</a></label>
+            <label>Prediction values :</label>
+            <a id="predictions0" class="left">0 : ?</a>
+            <a id="predictions1" class="left">1 : ?</a>
+            <a id="predictions2" class="left">2 : ?</a>
+            <a id="predictions3" class="left">3 : ?</a>
+            <a id="predictions4" class="left">4 : ?</a>
+            <a id="predictions5" class="left">5 : ?</a>
+            <a id="predictions6" class="left">6 : ?</a>
+            <a id="predictions7" class="left">7 : ?</a>
+            <a id="predictions8" class="left">8 : ?</a>
+            <a id="predictions9" class="left">9 : ?</a>
         </div>
 
-        <div class='col4'>
-            <label for='epochs'>EPOCHS:</label>
-            <input id='epochs' type='number' min='1' class='number'>
-            <button id='train' class='model' disabled>TRAIN MODEL</button>
-            <button id='test' class='model' disabled>TEST MODEL</button>
-        </div>
-        <div class='col2'>
-            <label>Show resize: <input type="checkbox" id="render" class='checkbox'></label>
-            <button id='predict' class='model' disabled>PREDICT DRAWING</button>
-        </div>
-    </div>
-
-    <div id='stats' style='display: flex; flex-direction: column'>
-        <label>Image resized : <canvas id='mini' width='28px' height='28px'></canvas></label>
-        <label>Predicted number : <a id='prediction'>?</a></label>
-        <label>Prediction values :</label>
-        <a id='predictions0' class='left'>0 : ?</a>
-        <a id='predictions1' class='left'>1 : ?</a>
-        <a id='predictions2' class='left'>2 : ?</a>
-        <a id='predictions3' class='left'>3 : ?</a>
-        <a id='predictions4' class='left'>4 : ?</a>
-        <a id='predictions5' class='left'>5 : ?</a>
-        <a id='predictions6' class='left'>6 : ?</a>
-        <a id='predictions7' class='left'>7 : ?</a>
-        <a id='predictions8' class='left'>8 : ?</a>
-        <a id='predictions9' class='left'>9 : ?</a>
-    </div>
-
-    <label id='info'></label>
-</body>
+        <label id="info"></label>
+    </body>
 </html>
